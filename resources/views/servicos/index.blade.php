@@ -7,6 +7,11 @@
 @stop
 
 @section('content')
+    @if(session('mensagem'))
+        <div class="alert alert-success">
+            {{ session('mensagem')}}
+        </div>
+    @endif
     <table class="table">
     <thead>
         <tr>
@@ -19,7 +24,7 @@
         <tr>
             <th>{{ $servico->id }}</th>
             <td>{{ $servico->nome }}</td>
-            <td><a class="btn btn-sm btn-primary" href="{{ route('servicos.edit',$servico) }}">update</a></td>
+            <td><a class="btn btn-sm btn-primary" href="{{ route('servicos.edit',$servico) }}">alterar</a></td>
     </tr>
     @empty
         <tr>

@@ -41,6 +41,8 @@ class ServicoRequest extends FormRequest
             'posicao' => [
                 'required',
                 'integer',
+                'min:1',
+                'max:99'
             ],
             'valor_minimo' => [
                 'required',
@@ -48,11 +50,15 @@ class ServicoRequest extends FormRequest
             ],
             'quantidade_horas' => [
                 'required',
-                'integer'
+                'integer',
+                'min:1',
+                'max:8'
             ],
             'porcentagem' => [
                 'required',
-                'integer'
+                'integer',
+                'min:1',
+                'max:99'
             ],
             'valor_quarto' => [
                 'required',
@@ -60,7 +66,9 @@ class ServicoRequest extends FormRequest
             ],
             'horas_quarto' => [
                 'required',
-                'integer'
+                'integer',
+                'min:1',
+                'max:8'
             ],
             'valor_sala' => [
                 'required',
@@ -68,7 +76,9 @@ class ServicoRequest extends FormRequest
             ],
             'horas_sala' => [
                 'required',
-                'integer'
+                'integer',
+                'min:1',
+                'max:8'
             ],
             'valor_banheiro' => [
                 'required',
@@ -76,7 +86,9 @@ class ServicoRequest extends FormRequest
             ],
             'horas_banheiro' => [
                 'required',
-                'integer'
+                'integer',
+                'min:1',
+                'max:8'
             ],
             'valor_cozinha' => [
                 'required',
@@ -84,7 +96,9 @@ class ServicoRequest extends FormRequest
             ],
             'horas_cozinha' => [
                 'required',
-                'integer'
+                'integer',
+                'min:1',
+                'max:8'
             ],
             'valor_quintal' => [
                 'required',
@@ -92,7 +106,9 @@ class ServicoRequest extends FormRequest
             ],
             'horas_quintal' => [
                 'required',
-                'integer'
+                'integer',
+                'min:1',
+                'max:8'
             ],
             'valor_outros' => [
                 'required',
@@ -100,8 +116,31 @@ class ServicoRequest extends FormRequest
             ],
             'horas_outros' => [
                 'required',
-                'integer'
+                'integer',
+                'min:1',
+                'max:8'
             ],
         ];
+    }
+
+    public function validationData()
+    {
+        $dados = $this->all();
+        $dados['valor_minimo'] = $this->formataValorMonetario($dados['valor_minimo']);
+        $dados['valor_quarto'] = $this->formataValorMonetario($dados['valor_quarto']);
+        $dados['valor_sala'] = $this->formataValorMonetario($dados['valor_sala']);
+        $dados['valor_banheiro'] = $this->formataValorMonetario($dados['valor_banheiro']);
+        $dados['valor_cozinha'] = $this->formataValorMonetario($dados['valor_cozinha']);
+        $dados['valor_quintal'] = $this->formataValorMonetario($dados['valor_quintal']);
+        $dados['valor_outros'] = $this->formataValorMonetario($dados['valor_outros']);
+
+        $this->replace($dados);
+
+        return $dados;
+    }
+
+    protected function formataValorMonetario($valor)
+    {
+        return str_replace(['.',','],['','.'],$valor);
     }
 }
