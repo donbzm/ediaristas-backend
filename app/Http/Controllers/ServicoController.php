@@ -24,16 +24,18 @@ class ServicoController extends Controller
         return redirect()->route('servicos.index')->with('mensagem','Serviço criado com sucesso');
     }
     
-    public function edit(int $id)
+    public function edit(Servico $servico)
     {
-        $servico = Servico::findOrFail($id);
         return view('servicos.edit')->with('servico',$servico);
     }
 
-    public function update(int $id, ServicoRequest $request)
+    // Esse é o método sem usar Bind Request
+    // public function update(int $id, ServicoRequest $request)
+    public function update(Servico $servico, ServicoRequest $request)
     {
         $dados = $request->except(['_token','_method']);
-        $servico = Servico::findOrFail($id);
+        // Se não usamos o Bind Request, precisamos buscar os dados
+        // $servico = Servico::findOrFail($id);
         $servico->update($dados);
         return redirect()->route('servicos.index')->with('mensagem','Serviço atualizado com sucesso');;
     }

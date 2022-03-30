@@ -127,7 +127,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-dark elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -244,6 +244,22 @@ return [
                 [
                     'text' => 'Cadastrar Serviço',
                     'route'  => 'servicos.create',
+                    'icon'    => 'fas fa-fw fa-file',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Cadastro de Usuários',
+            'icon'    => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Lista de Usuários',
+                    'route'  => 'usuarios.index',
+                    'icon'    => 'fas fa-fw fa-list',
+                ],
+                [
+                    'text' => 'Cadastrar Usuário',
+                    'route'  => 'usuarios.create',
                     'icon'    => 'fas fa-fw fa-file',
                 ],
             ],
